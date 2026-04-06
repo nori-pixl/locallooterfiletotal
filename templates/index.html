@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファイル共有開始</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f7f6; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 90%; max-width: 350px; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h3>共有サーバー接続</h3>
+    <input type="text" id="ipInput" placeholder="192.168.xx.xx" oninput="saveIP()">
+    <button onclick="start()">作成して開始</button>
+    <p style="font-size: 12px; color: #888; margin-top: 10px;">IPは自動保存されます</p>
+</div>
+<script>
+    window.onload = () => { document.getElementById('ipInput').value = localStorage.getItem('last_ip') || ''; };
+    function saveIP() { localStorage.setItem('last_ip', document.getElementById('ipInput').value); }
+    function start() {
+        const ip = document.getElementById('ipInput').value;
+        if(!ip) return alert("IPを入力してください");
+        // 1024〜65535のランダムポート
+        const port = Math.floor(Math.random() * 64512) + 1024;
+        window.location.href = `https://${ip}:${port}`;
+    }
+</script>
+</body>
+</html>
