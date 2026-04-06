@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファイル共有</title>
+</head>
+<body>
+    <h2>📁 共有中 (ルーター内)</h2>
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <input type="file" name="file"><button type="submit">送信</button>
+    </form>
+    <hr>
+    <h3>ファイルリスト</h3>
+    <ul>
+        {% for f in files %}
+        <li><a href="/download/{{ f }}" download>{{ f }}</a></li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/">← IP入力に戻る</a>
+</body>
+</html>
